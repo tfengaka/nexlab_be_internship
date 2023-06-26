@@ -1,0 +1,32 @@
+{
+  "name": "nexlb_be_internship",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.22.5",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.11.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.32.1",
+    "sequelize-cli": "^6.6.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.5",
+    "@babel/core": "^7.22.5",
+    "@babel/node": "^7.22.5",
+    "@babel/plugin-transform-runtime": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "nodemon": "^2.0.22"
+  },
+  "scripts": {
+    "clean": "rm -rf build",
+    "migrate": "sequelize-cli db:migrate",
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/index.js",
+    "build": "yarn clean && babel ./src -d ./build",
+    "start": "yarn build && node ./build/index.js"
+  }
+}
