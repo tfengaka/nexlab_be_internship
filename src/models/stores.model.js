@@ -15,6 +15,9 @@ export default (sequelize, DataTypes) => {
     logo: {
       type: DataTypes.STRING,
     },
+    status: {
+      type: DataTypes.STRING,
+    },
   });
   return Store;
 };

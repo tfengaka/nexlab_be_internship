@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import db, { connectDatabase } from '~/models';
+import createExampleData from './data';
+
+import API_ROUTER from './routes/index';
 
 const InitializeServer = () => {
   const app = express();
@@ -9,12 +12,14 @@ const InitializeServer = () => {
       origin: '*',
     })
   );
-  app.use(express.json());
-  db.sequelize.sync({ force: true });
+  app.use(express.json({ limit: '25mb' }));
 
-  app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to application.' });
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log('Drop and re-sync db.');
+    createExampleData();
   });
+
+  app.use('/api', API_ROUTER);
 
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
